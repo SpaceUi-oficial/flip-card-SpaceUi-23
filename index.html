@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flippable Card</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .card-container {
+        perspective: 1000px;
+        width: 90%;
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 3 / 4; /* Mantener proporciones */
+        transition: transform 0.3s ease;
+      }
+
+      .card-container:hover {
+        transform: scale(1.05);
+      }
+
+      .card {
+        margin-top: 5px;
+        width: 100%;
+        height: 100%;
+        max-height: 310px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+      }
+
+      .card:hover {
+        transform: rotateY(10deg);
+      }
+
+      .card.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .card-face {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-front {
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
+      .card-front img {
+        width: 100%;
+        height: 125px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .card-front h2 {
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .card-front p {
+        font-size: 1rem;
+        color: #555;
+        text-align: center;
+      }
+
+      .card-front button {
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.4s ease, transform 0.3s ease;
+      }
+
+      .card-front button:hover {
+        background: linear-gradient(135deg, #ff5733, #c70039);
+      }
+
+      .card-back {
+        background: #333;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        transform: rotateY(180deg);
+      }
+
+      .card-back h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .card-back p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .card-back button {
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        background: linear-gradient(135deg, #fff, #ddd);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.4s ease, transform 0.3s ease;
+      }
+
+      .card-back button:hover {
+        background: linear-gradient(135deg, #f7f7f7, #ccc);
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card" id="flip-card">
+        <div class="card-face card-front">
+          <img
+            src="https://images.unsplash.com/photo-1531432628802-0147522314a9?q=80&w=2084&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dt"
+            alt="Nature Image"
+          />
+          <h2>Discover the Forest</h2>
+          <p>Experience the tranquility and beauty of lush green forests.</p>
+          <button onclick="flipCard()">Flip Card</button>
+        </div>
+        <div class="card-face card-back">
+          <h2>Did You Know?</h2>
+          <p>
+            Forests cover 31% of the Earth's land area and are home to more than
+            80% of terrestrial species of animals, plants, and fungi.
+          </p>
+          <button onclick="flipCard()">Back to Front</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function flipCard() {
+        const card = document.getElementById("flip-card");
+        card.classList.toggle("flipped");
+      }
+    </script>
+  </body>
+</html>
